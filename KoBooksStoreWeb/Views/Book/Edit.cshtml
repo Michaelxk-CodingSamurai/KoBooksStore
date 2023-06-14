@@ -1,0 +1,54 @@
+﻿@model Book
+
+<form method="post" asp-action="Edit">
+	<input asp-for="BookID" hidden/>
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-primary">Edit Book</h2>
+			<hr />
+		</div>
+		<div asp-validation-summary="All"></div>
+		<div class="mb-3">
+			<label asp-for="Title"></label>
+			<input asp-for="Title" class="form-control" />
+			<span asp-validation-for="Title" class="text-danger"></span>
+		</div>
+		<div>
+			Current Author: 
+			@ViewBag.authorFullName
+		</div>
+		<div>
+			<a asp-controller="Book" asp-action="AssignAuthor" asp-route-bookId="@Model.BookID"
+            class="btn btn-info mx-2"> <i class="bi bi-signpost"></i> Assign Author</a>
+		</div>
+		<div>
+			<a asp-controller="Book" asp-action="DeleteAuthorFromBook" asp-route-id="@Model.BookID"
+            class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete Author</a>
+		</div>
+		<div class="mb-3">
+			<label asp-for="Description"></label>
+			<input asp-for="Description" class="form-control" />
+			<span asp-validation-for="Description" class="text-danger"></span>
+		</div>
+		<div class="mb-1">
+			<label asp-for="Price"></label>
+			<input asp-for="Price" class="form-control" />
+			<span asp-validation-for="Price" class="text-danger"></span>
+		</div>
+		<div class="mb-1">
+			<label asp-for="GenreIDRef"></label>
+			<select asp-for="GenreIDRef" asp-items="@(new SelectList(ViewBag.genres, "GenreID", "GenreName"))" class="form-select" ></select>
+			<span asp-validation-for="GenreIDRef" class="text-danger"></span>
+		</div>
+		<button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+		<a asp-controller="Book" asp-action="Index" class="btn btn-secondary" style="width:150px">
+			Back to Books List
+		</a>
+	</div>
+</form>
+
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}

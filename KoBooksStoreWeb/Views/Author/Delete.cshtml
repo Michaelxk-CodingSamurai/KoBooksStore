@@ -1,0 +1,32 @@
+﻿@model Author
+
+<form method="post" asp-action="Delete">
+	<input asp-for="AuthorID" hidden disabled/>
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-primary">Delete Author</h2>
+			<hr />
+		</div>
+		<div asp-validation-summary="All"></div>
+		<div class="mb-1">
+			<label asp-for="Forename"></label>
+			<input asp-for="Forename" disabled class="form-control" />
+			<span asp-validation-for="Forename" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="Surname"></label>
+			<input asp-for="Surname" disabled class="form-control" />
+			<span asp-validation-for="Surname" class="text-danger"></span>
+		</div>
+		<button type="submit" class="btn btn-danger" style="width:150px">Delete</button>
+		<a asp-controller="Book" asp-action="Index" class="btn btn-secondary" style="width:180px">
+			Back to Authors List
+		</a>
+	</div>
+</form>
+
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}
